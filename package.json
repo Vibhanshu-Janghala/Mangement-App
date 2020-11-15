@@ -1,0 +1,24 @@
+{
+  "name": "backend_rep",
+  "version": "1.0.0",
+  "description": "backend for first project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vibhanshu-Janghala/backend_rep.git"
+  },
+  "author": "Vibhanshu Janghala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vibhanshu-Janghala/backend_rep/issues"
+  },
+  "homepage": "https://github.com/Vibhanshu-Janghala/backend_rep#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.14"
+  },
+  "devDependencies": {}
+}
