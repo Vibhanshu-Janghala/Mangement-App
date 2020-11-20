@@ -20,19 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f401d9b-60aa-4368-b1a9-d461817b864b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/backend_rep.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/newUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/announcements.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/chat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/users.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/workflow.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/authGen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/authVerify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +57,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605228047151</updated>
-      <workItem from="1605228048312" duration="19720000" />
+      <workItem from="1605228048312" duration="30175000" />
+      <workItem from="1605786728939" duration="9629000" />
     </task>
     <servers />
   </component>
@@ -83,6 +75,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1513" height="210" key="GridCell.Tab.0.bottom" timestamp="1605228721775">

@@ -14,7 +14,10 @@ const userSchema = mongoose.Schema({
         required: true,
         unique:true},
     tdl:{type: Array,
-    default: []}
+        default: []},
+
+    refreshToken:{type:Array,
+        default:[]}
 
 })
 const User = mongoose.model("User",userSchema)
