@@ -2,6 +2,7 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const options = { /* ... */ };
 const io = require('socket.io')(server, options);
+const Chat = require("../models/chat")
 
 let user =[];
     //add callbacks later
@@ -11,7 +12,15 @@ io.on('connection', (socket) => {
     user.push(socket.username);
     io.emit("updateOnline",user);
     //send previous chat
-    socket.emit("prevChat",{null});
+    socket.on("prevChat",()=>{
+        Chat.find().exec.then((value)=>
+        {   console.log(value);
+            socket.emit("currentWorkflow",value);
+        })
+            .catch(
+                (e)=>{console.log(e);}
+            )
+    });
     //received message event
     //new message should broadcast and update mongodb for respective room
     socket.on("message",(data) =>{
@@ -20,7 +29,7 @@ io.on('connection', (socket) => {
             {$push:
                 {content:
                     {"message":data.message,"sender":data.name}}}
-                    ).then(console.log("Succesfull")).catch((e)=>{console.log(e)})
+                    ).then(console.log("Successful")).catch((e)=>{console.log(e)})
     });
     //disconnect event
     //change online users
