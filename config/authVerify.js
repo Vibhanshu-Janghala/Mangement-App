@@ -1,16 +1,16 @@
 //middleware for authentication verification
 
-app.post("/",(req,res)=> {
+const checkAccess = (req,res)=> {
     const tempUser = User.findOne({email:req.body.email});
 
     if(req.authToken != null){
         let tokData = jwt.verify(req.authToken,ACCESS_TOKEN_KEY);
-        if(req.user == tokData.name)
+        if(req.user === tokData.name)
         {
-            //accesss granted
+            //access granted
         }
         else{
-            //some error occured
+            //some error occurred
         }
 
     }
@@ -26,4 +26,5 @@ app.post("/",(req,res)=> {
     else{
         res.send("Access Denied")
     }
-})
+}
+module.exports = checkAccess;

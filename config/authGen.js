@@ -1,5 +1,5 @@
-app.post("/login",(req,res)=>{
-    //create both token if creds valid
+const authGen  = async(req,res)=>{
+    //create both token if credentials valid
     const tempUser = User.findOne({email:req.body.email});
     if(tempUser == null ){
         //user does not exists
@@ -20,4 +20,5 @@ app.post("/login",(req,res)=>{
         res.send()
         }
     }
-})
+}
+module.exports = authGen;

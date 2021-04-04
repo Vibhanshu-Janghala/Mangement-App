@@ -1,5 +1,7 @@
+const express = require("express");
+const router = express.Router();
 //get todolist
-router.get("/todolist", async (req, res) => {
+router.get("/get", async (req, res) => {
     try {
         const toDoList = await User.findById(req.id).exec;
         res.status(200).send(toDoList.tdl)
@@ -22,3 +24,5 @@ router.post("/addtodoitem",async (req,res)=>{
         res.status(500).send(e);
     }
 })
+
+module.exports = router ;

@@ -1,3 +1,5 @@
+const express = require("express");
+const router = express.Router();
 //get all announcement
 router.get("/announcements", async (req, res) => {
     try {
@@ -10,11 +12,11 @@ router.get("/announcements", async (req, res) => {
 })
 
 //add an announcement
-router.post("/addannouncement",async (req,res)=>{
+router.post("/addAnnouncement",async (req,res)=>{
     try{
         const newAnnouncement = new Announcement(req.body);
-        let saveAnncouncement = await newAnnouncement.save().exec
-        console.log(saveAnncouncement)
+        let saveAnnouncement = await newAnnouncement.save().exec
+        console.log(saveAnnouncement)
         res.sendStatus(200);
     }
     catch (e){
@@ -23,7 +25,7 @@ router.post("/addannouncement",async (req,res)=>{
     }
 })
 // delete an announcement
-router.delete("/delannouncement",async (req,res)=>{
+router.delete("/delAnnouncement",async (req,res)=>{
     try{
         let delAnnouncement = await Announcement.findByIdAndDelete(req.id).exec;
         console.log(delAnnouncement);
@@ -34,3 +36,4 @@ router.delete("/delannouncement",async (req,res)=>{
      res.status(500).send(e)
     }
 })
+module.exports = router ;
