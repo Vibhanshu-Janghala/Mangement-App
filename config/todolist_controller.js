@@ -1,27 +1,29 @@
 const express = require("express");
+const User = require("../models/users");
 const router = express.Router();
 //get todolist
 router.get("/get", async (req, res) => {
     try {
-        const toDoList = await User.findById(req.id).exec;
-        res.status(200).send(toDoList.tdl)
+        const userDoc = await User.findOne(req.body.name).exec();
+        res.status(200).send(userDoc.tdl)
     }
     catch (err) {
-        console.log(err)
+        console.log("Some Error occurred" + err);
+        res.status(500).send("Some Error occurred" + err);
     }
 })
 
 //update an item
 // both add and delete item are handled by this function
-router.post("/addtodoitem",async (req,res)=>{
+router.post("/addToDoItem",async (req,res)=>{
     try{
-        let updateUser = await User.findByIdAndUpdate(req.body.id,req.body.tdl).exec
-        console.log("updated" + updateUser)
+        let updatedUser = await User.findOneAndUpdate({"name":req.body.name},{"tdl":req.body.tdl}).exec();
+        console.log("Updated ToDoList" + updatedUser)
         res.sendStatus(200);
     }
     catch (e){
         console.log("Error in post Announce" + e)
-        res.status(500).send(e);
+        res.status(500).send("Some Error occurred" + e);
     }
 })
 

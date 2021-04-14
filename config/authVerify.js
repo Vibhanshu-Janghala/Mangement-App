@@ -1,30 +1,34 @@
 //middleware for authentication verification
 
-const checkAccess = (req,res)=> {
-    const tempUser = User.findOne({email:req.body.email});
+const jwt = require("jsonwebtoken");
+const User = require("../models/users");
+
+const checkAccess = async (req, res, next)=> {
+    const tempUser = await User.findOne({email:req.body.email}).exec() ;
 
     if(req.authToken != null){
-        let tokData = jwt.verify(req.authToken,ACCESS_TOKEN_KEY);
+        let tokData = await jwt.verify(req.authToken,ACCESS_TOKEN_KEY);
         if(req.user === tokData.name)
         {
-            //access granted
+            next();
         }
         else{
-            //some error occurred
+            res.status(401).send("Token verification failed");
         }
 
     }
     //no auth present check for refresh
-    else if(jwt.verify(req.signedCookies.refreshT,REFRESH_TOKEN_KEY) != null){
+    else if( await jwt.verify(req.signedCookies.refreshT,REFRESH_TOKEN_KEY) != null){
 
         let payload = {mail:tempUser.email,lvl:tempUser.lvl,name:tempUser.name}
-        const tempUser = User.findOne({email:req.body.email});
 
-        let accessToken = jwt.sign(payload,ACCESS_TOKEN_KEY)
-        res.send(accessToken)
+        let accessToken = await jwt.sign(payload,ACCESS_TOKEN_KEY)
+        res.status(200);
+        res.authToken = accessToken;
+        next();
    }
     else{
-        res.send("Access Denied")
+        res.status(401).send("Authorization failed");
     }
 }
 module.exports = checkAccess;

@@ -1,6 +1,8 @@
+const Chat = require("../models/chat");
+
 module.exports = {
     "prevChat": () => {
-        Chat.find().toArray().exec.then((value) => {
+        Chat.find().exec().then((value) => {
             console.log(value);
             socket.emit("currentWorkflow", value);
         })
@@ -13,7 +15,7 @@ module.exports = {
 
     "message": (data) => {
         socket.broadcast.emit("newMessage", data)
-        let timeR = new Date().getTime();
+        let timeR = new Date();
         Chat.findOneAndUpdate({"room": data.room},
             {
                 $push:
@@ -22,10 +24,10 @@ module.exports = {
                             {"message": data.message, "sender": data.name, "timeRegistered": timeR}
                     }
             }
-        )
-            .then(console.log("Successful"))
+        ).exec()
+            .then(()=>console.log("Successfully added message"))
             .catch((e) => {
-                console.log(e)
+                console.log("Error adding message"+ e);
             })
     }
 

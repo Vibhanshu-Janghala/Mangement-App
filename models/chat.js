@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const chatSchema = mongoose.Schema({
+const chatSchema = new mongoose.Schema({
     room:{type:String,required:true,unique:true},
     content:[{
         message:{type:String},

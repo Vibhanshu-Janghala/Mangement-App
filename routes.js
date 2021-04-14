@@ -10,14 +10,16 @@ const todoHandler = require("./config/todolist_controller");
 router.get('/', function(req, res) {
     res.send('home page');
 });
-//route for verifying auth
-router.post("/api/accessVerify",accessCheck)
 
-// route for creating New Account
+// route for creating New UserAccount
 router.post("/api/createAccount",createAcc);
 
-// route for Login
+// generate tokens for new Account
 router.post("/api/login",loginHandler);
+
+//route for verifying auth
+router.all("/api/accessVerify",accessCheck)
+
 
 // APP FUNCTIONALITY ROUTES
 
@@ -26,4 +28,5 @@ router.use("/announcement",announcementHandler)
 
 // route for todoList
 router.use("./todoList",todoHandler)
+
 module.exports = router;
