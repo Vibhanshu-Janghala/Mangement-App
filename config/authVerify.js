@@ -4,29 +4,20 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
 const checkAccess = async (req, res, next)=> {
-    const tempUser = await User.findOne({email:req.body.email}).exec() ;
 
-    if(req.authToken != null){
-        let tokData = await jwt.verify(req.authToken,ACCESS_TOKEN_KEY);
-        if(req.user === tokData.name)
-        {
+    let data = req.get("Authorization");
+
+    if( data != null){
+        try{
+            let tokData = await jwt.verify(data.authToken,process.env.ACCESS_TOKEN_SECRET);
             next();
         }
-        else{
+        catch(e){
             res.status(401).send("Token verification failed");
+            console.log(e);
         }
 
     }
-    //no auth present check for refresh
-    else if( await jwt.verify(req.signedCookies.refreshT,REFRESH_TOKEN_KEY) != null){
-
-        let payload = {mail:tempUser.email,lvl:tempUser.lvl,name:tempUser.name}
-
-        let accessToken = await jwt.sign(payload,ACCESS_TOKEN_KEY)
-        res.status(200);
-        res.authToken = accessToken;
-        next();
-   }
     else{
         res.status(401).send("Authorization failed");
     }

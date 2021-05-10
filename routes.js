@@ -1,5 +1,7 @@
+
 const express = require('express');
 const router = express.Router();
+const bgLogin = require("./config/lazyLogin")
 const createAcc = require("./config/newUser");
 const accessCheck = require("./config/authVerify");
 const loginHandler = require("./config/authGen");
@@ -8,12 +10,15 @@ const todoHandler = require("./config/todolist_controller");
 
 // LOGIN RELATED ROUTES
 router.get('/', function(req, res) {
-    res.send('home page');
+    res.status(200).send('home page');
 });
+// route for lazy login
+router.post("./api/lazyLogin",bgLogin)
 
 // route for creating New UserAccount
 router.post("/api/createAccount",createAcc);
 
+// login handler also generates token
 // generate tokens for new Account
 router.post("/api/login",loginHandler);
 

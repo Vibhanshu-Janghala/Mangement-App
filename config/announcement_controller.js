@@ -16,7 +16,8 @@ router.get("/announcements", async (req, res) => {
 
 //add an announcement
 router.post("/addAnnouncement",async (req,res)=>{
-    if(req.lvl === 1)
+    let userData = req.getAttribute("Authorization");
+    if(userData.level === 2)
     {
         try{
         const newAnnouncement = new Announcement(req.body);
@@ -32,16 +33,17 @@ router.post("/addAnnouncement",async (req,res)=>{
 })
 // delete an announcement
 router.delete("/delAnnouncement",async (req,res)=>{
-    if(req.lvl === 1)
+    let userData = req.getAttribute("Authorization");
+    if(userData.level === 2)
     {
         try{
-            let delAnnouncement = await Announcement.findByIdAndDelete(req.id).exec();
+            let delAnnouncement = await Announcement.findOneAndDelete({title:req.body.title}).exec();
             console.log(delAnnouncement);
             res.sendStatus(200);
         }
         catch (e) {
             console.log("Error while deleting" + e)
-            res.status(500).send(e)
+            res.status(500).send("Error occurred " +e);
         }
     }
 })

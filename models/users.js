@@ -16,8 +16,8 @@ const userSchema = new mongoose.Schema({
     tdl:{type: Array,
         default: []},
 
-    refreshToken:{type:Array,
-        default:[]}
+    refreshToken:{type:String,
+        default:""}
 
 })
 const User = mongoose.model("User",userSchema)

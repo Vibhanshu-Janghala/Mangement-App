@@ -19,6 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="8f401d9b-60aa-4368-b1a9-d461817b864b" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/backend_rep.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend_rep.iml" afterDir="false" />
@@ -39,6 +40,9 @@
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes.js" afterDir="false" />
     </list>
+=======
+    <list default="true" id="8f401d9b-60aa-4368-b1a9-d461817b864b" name="Default Changelist" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,6 +117,7 @@
       <workItem from="1616772497323" duration="610000" />
       <workItem from="1616773201500" duration="2650000" />
       <workItem from="1616845334226" duration="3785000" />
+<<<<<<< Updated upstream
       <workItem from="1617529197705" duration="595000" />
       <workItem from="1617551925191" duration="3888000" />
       <workItem from="1617612670975" duration="4938000" />
@@ -123,6 +128,9 @@
       <workItem from="1618235035219" duration="4657000" />
       <workItem from="1618322248865" duration="2930000" />
       <workItem from="1618392150541" duration="6096000" />
+=======
+      <workItem from="1618584107141" duration="10000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

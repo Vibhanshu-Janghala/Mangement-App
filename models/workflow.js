@@ -7,7 +7,9 @@ const workflowSchema = new mongoose.Schema({
         title: {type: String, required: true, unique: true},
         description: {type: String, required: true},
         priority: {type: String, required: true},
-        progressList: {type: Array}
+        progressList: {type: Array},
+        managedBy :{type:String},
+        dueDate :{type:Date}
     }]
 })
 

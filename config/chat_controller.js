@@ -10,25 +10,28 @@ module.exports = {
                 (e) => {
                     console.log(e);
                 }
-            )
+            );
     },
 
-    "message": (data) => {
+    "message": (data,fn) => {
+        fn({"status":200});
+        data.timeStamp = new Date();
         socket.broadcast.emit("newMessage", data)
-        let timeR = new Date();
         Chat.findOneAndUpdate({"room": data.room},
             {
                 $push:
                     {
                         content:
-                            {"message": data.message, "sender": data.name, "timeRegistered": timeR}
+                            {"message": data.message,
+                                "sender": data.name,
+                            "timeStamp": data.timeStamp}
                     }
             }
         ).exec()
             .then(()=>console.log("Successfully added message"))
             .catch((e) => {
                 console.log("Error adding message"+ e);
-            })
+            });
     }
 
 };

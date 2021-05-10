@@ -9,15 +9,17 @@ module.exports = {
                 (e)=>{console.log(e);}
             )
     },
-    "addNewCard":(data)=>{
+    "addNewCard":(data,fn)=>{
+        fn({"status":200});
         Workflow.findOneAndUpdate({"listName":data.listname},
             { $push: {"content":data.card} }
         ).exec().then(()=>console.log("Card Successfully Added"))
             .catch((e)=>{console.log(e)});
         socket.broadcast.emit("newCard",(data));
     },
-    "updateWorkflow":(data)=>{
+    "updateWorkflow":(data,fn)=>{
 
+        fn({"status":200});
         socket.broadcast.emit("updateCard",data)
         Workflow.findOneAndUpdate({"listName":data.listName,
                 content: { $elemMatch: { "title": data.title }  }
@@ -26,7 +28,8 @@ module.exports = {
         ).exec.then(()=>console.log("Successfully Updated Card"))
             .catch((e)=>{console.log(e)})
     },
-    "deleteWorkflow":(data)=>{
+    "deleteWorkflow":(data,fn)=>{
+        fn({"status":200});
         socket.broadcast.emit("deleteCard",data)
         Workflow.findOneAndDelete({"listName":data.listName,
                 content: { $elemMatch: { "title": data.title } }
@@ -34,15 +37,17 @@ module.exports = {
         ).exec().then(()=>console.log("Successfully Deleted Card"))
             .catch((e)=>{console.log(e)})
     },
-    "createList": (data)=>{
+    "createList": (data,fn)=>{
         //update complete workflow
+        fn({"status":200});
         socket.broadcast.emit("createNewList",data)
         Workflow.create({"listName":data.listName,"content":[]}).exec()
             .then(()=>{console.log("List Created")})
             .catch((e)=>{console.log("Error while adding List" +e)})
     },
-    "deleteList":(data)=>{
+    "deleteList":(data,fn)=>{
         //update complete workflow
+        fn({"status":200});
         socket.broadcast.emit("deleteThisList",data)
         Workflow.findOneAndDelete({"listName":data.listName}
         ).exec().then(()=>console.log("Successful")).catch((e)=>{console.log(e)})

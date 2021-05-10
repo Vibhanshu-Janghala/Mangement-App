@@ -1,23 +1,30 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
-const registerNewUser =  async(req,res,next) => {
+const registerNewUser =  async (req,res,next) => {
+    console.log(req.body);
    //check(by email) if user already exists
-    if( await User.exists({ email: req.body.email })) {
+    if( await User.exists({ name: req.body.name })) {
             res.status(406).send("Already Exists");
     }
     else{
-        const hashPass = bcrypt.hashSync(req.body.password,7);
+        const hashPass = await bcrypt.hash(req.body.password,7);
             let newUser = new User({name:req.body.name,
                                     password:hashPass,
                                     level:req.body.level,
                                     email:req.body.email
             })
-        await newUser.save().then(()=>{console.log("User Added")}).catch((err)=>
-            (console.log("User cant be added.Error :-"+err)));
-           // THIS IS A MIDDLEWARE FOR LOGIN
-            //after this pass param to login for auth and refresh token
-         next();
+        try {
+            await newUser.save();
+            console.log("User Added");
+            req.newUser = true ;
+            // After this pass param to authGen for Auth and Refresh Token
+            next();
+            }
+        catch(e){
+                console.log("User can't be added. Error :-"+ e);
+            }
+
          }
     }
 module.exports = registerNewUser ;
