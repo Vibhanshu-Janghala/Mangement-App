@@ -14,17 +14,19 @@ const authGen  = async (req,res)=>{
             let proceedTokenGeneration = req.newUser ? true : await bcrypt.compareSync(req.body.password, tempUser.password);
             if (proceedTokenGeneration) {
                 let payload = {level: tempUser.level, name: tempUser.name};
-                let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_KEY);
+                let accessToken = jwt.sign(payload, ""+process.env.ACCESS_TOKEN_SECRET);
                 let refreshToken = jwt.sign({name: tempUser.name},
-                    process.env.REFRESH_TOKEN_KEY, {expiresIn: '24h'});
-                res.cookie("refreshToken", refreshToken, {secure: true, httpOnly: true, signed: true});
+                   ""+ process.env.REFRESH_TOKEN_SECRET);
+                res.cookie("refreshToken", refreshToken,
+                        {httpOnly: true, signed: true,
+                            maxAge: (24*3600*1000) });
                 let userData = {
                     authToken: accessToken,
                     name: tempUser.name,
                     level: tempUser.level,
                     tdl: tempUser.tdl
                 }
-                const updateRefreshTok = await User.updateOne({name: tempUser.name},
+                await User.updateOne({name: tempUser.name},
                     {refreshToken: refreshToken});
                 res.status(200).send(userData);
             }

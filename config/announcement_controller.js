@@ -3,7 +3,7 @@ const Announcement = require("../models/announcements");
 const router = express.Router();
 
 //get all announcement
-router.get("/announcements", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const aList = await Announcement.find({}).exec();
         res.status(200).send(aList)
@@ -15,25 +15,30 @@ router.get("/announcements", async (req, res) => {
 })
 
 //add an announcement
-router.post("/addAnnouncement",async (req,res)=>{
-    let userData = req.getAttribute("Authorization");
-    if(userData.level === 2)
+router.post("/add",async (req,res)=>{
+    let userData = JSON.parse(req.get("Authorization"));
+    if(parseInt(userData.level) === 2)
     {
+      
         try{
-        const newAnnouncement = new Announcement(req.body);
+        const newAnnouncement = new Announcement({"title":req.body.title,"description":req.body.description});
         let saveAnnouncement = await newAnnouncement.save();
-        console.log(saveAnnouncement)
-        res.sendStatus(200);
+        console.log(saveAnnouncement);
+        res.status(200).send("Successful");
          }
          catch (e){
         console.log("Error in post Announce" + e)
         res.status(500).send(e);
          }
     }
+    else{
+        res.status(401).send("Unauthorized")
+    }
 })
 // delete an announcement
-router.delete("/delAnnouncement",async (req,res)=>{
-    let userData = req.getAttribute("Authorization");
+router.delete("/delete",async (req,res)=>{
+    let userData = JSON.parse( req.get("Authorization"));
+	
     if(userData.level === 2)
     {
         try{
@@ -46,5 +51,8 @@ router.delete("/delAnnouncement",async (req,res)=>{
             res.status(500).send("Error occurred " +e);
         }
     }
+	else{
+		res.status(401).send("Access Denied");
+	}
 })
 module.exports = router ;

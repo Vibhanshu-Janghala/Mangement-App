@@ -1,7 +1,6 @@
 //middleware for authentication verification
 
 const jwt = require("jsonwebtoken");
-const User = require("../models/users");
 
 const checkAccess = async (req, res, next)=> {
 
@@ -9,7 +8,7 @@ const checkAccess = async (req, res, next)=> {
 
     if( data != null){
         try{
-            let tokData = await jwt.verify(data.authToken,process.env.ACCESS_TOKEN_SECRET);
+            await jwt.verify(data.authToken,""+process.env.ACCESS_TOKEN_SECRET);
             next();
         }
         catch(e){

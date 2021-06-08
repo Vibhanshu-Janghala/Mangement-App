@@ -1,6 +1,6 @@
 const User = require("../models/users");
 
-const signOut = async (req,res)=>{
+const logOut = async (req,res)=>{
     let data = req.get("Authorization");
     try {
         await User.findOneAndUpdate({name: data.name}, {refreshToken: ""}).exec();
@@ -11,4 +11,4 @@ const signOut = async (req,res)=>{
     }
 }
 
-export default signOut;
+module.exports = logOut;

@@ -4,7 +4,7 @@ const router = express.Router();
 //get todolist
 router.get("/get", async (req, res) => {
     try {
-        let data = req.getAttribute("Authorization");
+        let data = JSON.parse( req.get("Authorization"));
         const userDoc = await User.findOne({name:data.name}).exec();
         res.status(200).send(userDoc.tdl)
     }
@@ -16,11 +16,11 @@ router.get("/get", async (req, res) => {
 
 //update an item
 // both add and delete item are handled by this function
-router.post("/addToDoItem",async (req,res)=>{
+router.post("/add",async (req,res)=>{
     try{
-        let data = req.getAttribute("Authorization");
+        let data = JSON.parse(req.get("Authorization"));
         let updatedUser = await User.findOneAndUpdate({"name":data.name},
-            { $push : { "tdl": req.body.tdl} }).exec();
+            { $push : { "tdl": {"title":req.body.title,"content":req.body.content} }}).exec();
         console.log("Updated ToDoList" + updatedUser)
         res.sendStatus(200);
     }
@@ -30,12 +30,12 @@ router.post("/addToDoItem",async (req,res)=>{
     }
 })
 
-router.post("/deleteToDoItem",async (req,res)=>{
+router.post("/delete",async (req,res)=>{
     try{
-        let data = req.getAttribute("Authorization");
+        let data = JSON.parse(req.get("Authorization"));
 
         let updatedUser = await User.findOneAndUpdate({"name":data.name},
-            { $pull : { tdl: {title:req.body}  }}).exec();
+            { $pull : { tdl: {title:req.body.title}  }}).exec();
         console.log("Updated ToDoList" + updatedUser)
         res.sendStatus(200);
     }

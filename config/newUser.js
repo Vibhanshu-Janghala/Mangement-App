@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users");
 
 const registerNewUser =  async (req,res,next) => {
-    console.log(req.body);
+	console.log(req.body);
    //check(by email) if user already exists
     if( await User.exists({ name: req.body.name })) {
             res.status(406).send("Already Exists");
