@@ -42,7 +42,7 @@ const socketOptions = {
     transports: ["websocket"],
     path: "/socket.io",
     cors: {
-        "origin": "http://localhost:3000",
+        "origin": "*",
         "methods": ["GET,HEAD,PUT,PATCH,POST,DELETE"],
         "preflightContinue": false,
         "optionsSuccessStatus": 204
@@ -56,9 +56,11 @@ const workflowHandler = require("./config/workflow_controller");
     // Socket Middlewares
 
 io.use(async (socket, next) => {
+	console.log(socket.handshake.auth);
     if (socket.handshake.auth === null) {
-        next(new Error("No Auth Data"))
-    } else {
+		socket.disconnect();
+    } 
+	else {
         try {
             const tokData = await jwt.verify(socket.handshake.auth.authToken, "" + process.env.ACCESS_TOKEN_SECRET);
 			console.log(tokData);
@@ -66,7 +68,9 @@ io.use(async (socket, next) => {
                 socket.data = {"name": tokData.name, "level": tokData.level};
                 next();
             }
-            next(new Error("Authorization Failed"));
+			else{
+					socket.disconnect();
+			}
         } catch (e) {
             console.log(e);
         }
@@ -78,12 +82,14 @@ io.use(async (socket, next) => {
 
  let onlineUsers = [];
 io.on("connection",(socket)=>{
-	
+	console.log("connected");
 	onlineUsers.push({"id":socket.id,"name":socket.data.name});
 
         io.emit("updateOnline", onlineUsers);
 		socket.on("getOnline",async()=>{
 			socket.emit("updateOnline",onlineUsers);
+				console.log(onlineUsers)
+
 		});
 	
 	chatHandler(io,socket);

@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 
 const cardSchema = new mongoose.Schema({
 	title: {type: String, required: true,
-				unique: true , required:true},
-				
-    description: {type: String, required: true},
+			index: {unique: true, partialFilterExpression: { title: { $type: 'string' } }}
+			},
+    givenDescription: {type: String, required: true},
     priority: {type: String, required: true},
     progressList: [{
 		content: String,
