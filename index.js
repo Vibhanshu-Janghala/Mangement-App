@@ -56,7 +56,6 @@ const workflowHandler = require("./config/workflow_controller");
     // Socket Middlewares
 
 io.use(async (socket, next) => {
-	console.log(socket.handshake.auth);
     if (socket.handshake.auth === null) {
 		socket.disconnect();
     } 
@@ -80,15 +79,14 @@ io.use(async (socket, next) => {
 
 // Functionality handlers for Socket
 
- let onlineUsers = [];
+ let onlineUsers = {};
 io.on("connection",(socket)=>{
 	console.log("connected");
-	onlineUsers.push({"id":socket.id,"name":socket.data.name});
+	onlineUsers[socket.data.name] = socket.id;
 
         io.emit("updateOnline", onlineUsers);
 		socket.on("getOnline",async()=>{
 			socket.emit("updateOnline",onlineUsers);
-				console.log(onlineUsers)
 
 		});
 	
@@ -96,9 +94,8 @@ io.on("connection",(socket)=>{
 	workflowHandler(io,socket);
 	
 	socket.on("disconnecting", () => {
-            let delIndex = onlineUsers.indexOf({"id":socket.id,"name":socket.data.name});
-            onlineUsers.splice(delIndex, 1);
-            console.log("User disconnecting" + socket.data.name);
+            delete onlineUsers[socket.data.name];
+            console.log("User disconnecting" +"  "+ socket.data.name);
             io.emit("updateOnline", onlineUsers);
         });
         socket.on("disconnect", () => {

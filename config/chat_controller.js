@@ -9,7 +9,7 @@ module.exports = function (io, socket) {
                 let saveRoom = await newRoom.save();
                 console.log(saveRoom);
                 fn({status: 200});
-                socket.broadcast.emit("createRoom", data);
+                io.emit("createRoom", data);
             } catch (e) {
                 console.log("Error in newRoom" + e);
             }
@@ -22,7 +22,7 @@ module.exports = function (io, socket) {
             try {
                 await Chat.findOneAndDelete({"room": data.room},).exec();
                 console.log("Deleted Room");
-                socket.broadcast.emit("delRoom", data);
+                io.emit("delRoom", data);
                 fn({status: 200});
             } catch (e) {
                 console.log("Error in deleteRoom" + e);
@@ -58,7 +58,8 @@ module.exports = function (io, socket) {
                         }
                 }).exec();
             fn({status: 200});
-            socket.broadcast.emit("newMessage", data);
+			console.log(data);
+            io.emit("newMessage", data);
 
         } catch {
             console.log("Error while handling chat message");
