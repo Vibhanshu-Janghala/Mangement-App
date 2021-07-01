@@ -8,7 +8,7 @@ const logOut = async (req,res)=>{
 							{httpOnly: true, signed: true}).send();
     }
     catch(e){
-        res.status(500).send("Some error occurred")
+        res.status(500).send("Error occured while logging out")
     }
 }
 

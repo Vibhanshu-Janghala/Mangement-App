@@ -4,7 +4,6 @@ module.exports = function (io, socket) {
 
     socket.on("getWorkflow", () => {
         Workflow.find().exec().then((value) => {
-            console.log(value);
             socket.emit("currentWorkflow", value);
         })
             .catch(
@@ -15,8 +14,6 @@ module.exports = function (io, socket) {
     });
     // data = {listName,title,completeCard}s
     socket.on("addWorkflow", async (data, fn) => {
-        console.log(data);
-        console.log(data.card.progressList);
         if (socket.data.level === 2 || socket.data.level === 1) {
             try {
                 let tempDoc = await Workflow.findOne({"listName": data.listName}).exec();
@@ -43,7 +40,6 @@ module.exports = function (io, socket) {
     socket.on("updateWorkflow", async (data, fn) => {
 
         if (socket.data.level === 2 || socket.data.level === 1) {
-			console.log(data);
             try {
                 let tempDoc = await Workflow.findOneAndUpdate(
                     {"listName": data.listName, "content.title": data.title},
@@ -59,7 +55,6 @@ module.exports = function (io, socket) {
                             }
                         }
                     }, {new: true}).exec();
-                console.log(tempDoc);
 
                 fn({"status": 200});
                 socket.broadcast.emit("updateCard", (data));
@@ -74,7 +69,6 @@ module.exports = function (io, socket) {
     socket.on("deleteWorkflow", async (data, fn) => {
         if (socket.data.level === 2 || socket.data.level === 1) {
             try {
-				console.log(data)
                 let tempDoc = await Workflow.findOneAndUpdate(
                     {"listName": data.listName, "content.title": data.title},
                     {
@@ -84,7 +78,6 @@ module.exports = function (io, socket) {
                             }
                         }
                     }, {new: true}).exec();
-                console.log(tempDoc);
                 fn({"status": 200});
                 socket.broadcast.emit("deleteCard", data)
             } catch(e) {

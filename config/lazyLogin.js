@@ -24,7 +24,6 @@ const jwt = require('jsonwebtoken');
         }
         else{
             res.status(400).send("Invalid Token");
-            console.log("Deleted by signing out");
         }
 
     }

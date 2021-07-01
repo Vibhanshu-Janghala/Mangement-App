@@ -7,7 +7,6 @@ module.exports = function (io, socket) {
             try {
                 const newRoom = new Chat({"room": data.room, "content": []});
                 let saveRoom = await newRoom.save();
-                console.log(saveRoom);
                 fn({status: 200});
                 io.emit("createRoom", data);
             } catch (e) {
@@ -21,7 +20,6 @@ module.exports = function (io, socket) {
         if (socket.data.level === 2) {
             try {
                 await Chat.findOneAndDelete({"room": data.room},).exec();
-                console.log("Deleted Room");
                 io.emit("delRoom", data);
                 fn({status: 200});
             } catch (e) {
@@ -35,7 +33,6 @@ module.exports = function (io, socket) {
         try {
             let prevChat = await Chat.find().exec();
             socket.emit("currentChat", prevChat);
-            console.log(prevChat)
         } catch {
             console.log("Error while sending previous chat");
         }
@@ -58,7 +55,6 @@ module.exports = function (io, socket) {
                         }
                 }).exec();
             fn({status: 200});
-			console.log(data);
             io.emit("newMessage", data);
 
         } catch {

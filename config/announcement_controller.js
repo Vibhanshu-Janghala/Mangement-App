@@ -23,7 +23,6 @@ router.post("/add",async (req,res)=>{
         try{
         const newAnnouncement = new Announcement({"title":req.body.title,"description":req.body.description});
         let saveAnnouncement = await newAnnouncement.save();
-        console.log(saveAnnouncement);
         res.status(200).send("Successful");
          }
          catch (e){
@@ -43,7 +42,6 @@ router.delete("/delete",async (req,res)=>{
     {
         try{
             let delAnnouncement = await Announcement.findOneAndDelete({title:req.body.title}).exec();
-            console.log(delAnnouncement);
             res.sendStatus(200);
         }
         catch (e) {

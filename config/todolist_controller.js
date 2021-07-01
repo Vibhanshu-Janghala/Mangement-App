@@ -15,13 +15,12 @@ router.get("/get", async (req, res) => {
 })
 
 //update an item
-// both add and delete item are handled by this function
+
 router.post("/add",async (req,res)=>{
     try{
         let data = JSON.parse(req.get("Authorization"));
         let updatedUser = await User.findOneAndUpdate({"name":data.name},
             { $push : { "tdl": {"title":req.body.title,"content":req.body.content} }}).exec();
-        console.log("Updated ToDoList" + updatedUser)
         res.sendStatus(200);
     }
     catch (e){
@@ -36,12 +35,11 @@ router.post("/delete",async (req,res)=>{
 
         let updatedUser = await User.findOneAndUpdate({"name":data.name},
             { $pull : { tdl: {title:req.body.title}  }}).exec();
-        console.log("Updated ToDoList" + updatedUser)
         res.sendStatus(200);
     }
     catch (e){
         console.log("Error in post Announce" + e)
-        res.sendStatus(500);
+        res.status(500).send("Some Error occurred" + e);
     }
 })
 
