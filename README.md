@@ -26,13 +26,13 @@
 
 
 ## Features
-    -   Announcements :- 
+     Announcements :- 
          Add/Remove/View, based on Access Level, company wide announcements for everyone
-    -   To Do List :- 
+     To Do List :- 
          Personal ToDoList that is linked to user's account for work management
-    -   Workflow :- 
+     Workflow :- 
          A Trello-like workspace based on list and cards which is implemented through WebSockets
-    -   Chat :- 
+     Chat :- 
          Chat space for company members similar to slack channels. Also implemented through WebSockets
 
 ## Setup
