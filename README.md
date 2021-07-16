@@ -57,5 +57,5 @@
     I have a lot for this section but this can be better discussed by contacting me through the details provided.
 
 ## Contact
-    Created by [Vibhanshu Janghala](www.linkedin.com/in/vibhanshu-janghala-a83b311b6) - feel free to contact me!
+Created by [Vibhanshu Janghala](www.linkedin.com/in/vibhanshu-janghala-a83b311b6) - feel free to contact me!
 
