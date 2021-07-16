@@ -1,5 +1,5 @@
 
-# Management Aoo
+# Management App
 > A FullStack React based App made for internal management for businesses and improving productivity.
 > Live demo available [_HERE_](https://vibhanshuj.codes) -> Test Account :- Username: Test ; Password: test
 
