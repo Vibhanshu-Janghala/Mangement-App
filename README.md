@@ -1,90 +1,61 @@
 
-# Project Name
-> Outline a brief description of your project.
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+# Management Aoo
+> A FullStack React based App made for internal management for businesses and improving productivity.
+> Live demo available [_HERE_](https://vibhanshuj.codes) -> Test Account :- Username: Test ; Password: test
 
 ## Table of Contents
-* [General Info](#general-information)
+* [General Info](#general-info)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-<!-- * [License](#license) -->
 
 
-## General Information
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
-- What is the purpose of your project?
-- Why did you undertake it?
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+## General Info
+    This is the first project made by me to demonstrate my FullStack Skills.
+    Please use the Contents section to find relevent info.
 
 
 ## Technologies Used
-- Tech 1 - version 1.0
-- Tech 2 - version 2.0
-- Tech 3 - version 3.0
+    - FrontEnd :- HTML, CSS, React (with Hooks and Router)
+    - Backend :- ExpressJS, MongoDB (hosted on MongoDBAtlas)
+    - API :- HTTP and WebSockets
 
 
 ## Features
-List the ready features here:
-- Awesome feature 1
-- Awesome feature 2
-- Awesome feature 3
-
-
-## Screenshots
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
-
+    -   Announcements :- 
+         Add/Remove/View, based on Access Level, company wide announcements for everyone
+    -   To Do List :- 
+         Personal ToDoList that is linked to user's account for work management
+    -   Workflow :- 
+         A Trello-like workspace based on list and cards which is implemented through WebSockets
+    -   Chat :- 
+         Chat space for company members similar to slack channels. Also implemented through WebSockets
 
 ## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+    All the project dependencies should be available in package-lock.json
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
-
+    To run the project locally you will need to provide 4 env variables :-
+        PORT,  DATABASE_URL, ACCESS_TOKEN_SECRET,  REFRESH_TOKEN_SECRET, COOKIE_SECRET
 
 ## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
 
-`write-your-code-here`
+    run `npm install` and after node.js has installed all libraries run `node index.js` to start the server.
+    Note - You need to provide 4 env variables mentioned in Setup section
 
 
 ## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
+    Project is: _no longer being worked on_. 
+    The development of this project has been paused temporarily due to time  constraints for now.
 
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
 
-Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
-
-To do:
-- Feature to be added 1
-- Feature to be added 2
-
-
-## Acknowledgements
-Give credit here.
-- This project was inspired by...
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
-
+    I have a lot for this section but this can be better discussed by contacting me through the details provided.
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+    Created by [Vibhanshu Janghala](www.linkedin.com/in/vibhanshu-janghala-a83b311b6) - feel free to contact me!
 
-
-<!-- Optional -->
-<!-- ## License -->
-<!-- This project is open source and available under the [... License](). -->
-
-<!-- You don't have to include all sections - just the one's relevant to your project -->
