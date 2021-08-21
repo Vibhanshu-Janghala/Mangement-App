@@ -100,7 +100,7 @@ app.get(`*`, (req, res) => {
     res.sendFile(path.resolve(__dirname, './build', 'index.html'));
 });
 
-httpServer.listen(process.env.PORT, () => {
+httpServer.listen(process.env.PORT || 8080, () => {
     console.log(`Example app listening at http://localhost:${process.env.PORT}`)
 });
 
