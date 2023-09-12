@@ -48,12 +48,8 @@ Note - You need to provide 4 env variables mentioned in Setup section
 
 ## Project Status
 - Project is: _no longer being worked on_. 
-- The development of this project has been paused temporarily due to time  constraints for now.
+- The development of this project has been paused temporarily due to time constraints for now.
 
-
-## Room for Improvement
-
-I have a lot for this section but this can be better discussed by contacting me through the details provided.
 
 ## Contact
 Created by [Vibhanshu Janghala](https://www.linkedin.com/in/vibhanshu-janghala-a83b311b6) - feel free to contact me!
